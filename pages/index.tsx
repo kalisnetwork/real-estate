@@ -1,131 +1,62 @@
 import type { NextPage } from "next";
-import "antd/dist/antd.min.css";
-import { Menu, Dropdown, Button } from "antd";
-import {
-  DownOutlined,
-  ArrowLeftOutlined,
-  ArrowRightOutlined,
-  CalendarOutlined,
-  CheckOutlined,
-  ClockCircleOutlined,
-  CloseOutlined,
-  DeleteOutlined,
-  EditOutlined,
-  ExclamationCircleOutlined,
-  HeartOutlined,
-  LeftOutlined,
-  LockOutlined,
-  MailOutlined,
-  PaperClipOutlined,
-  PhoneOutlined,
-  QuestionCircleOutlined,
-  ReloadOutlined,
-  RightOutlined,
-  SearchOutlined,
-  SendOutlined,
-  ShareAltOutlined,
-  UserOutlined,
-} from "@ant-design/icons";
+import Head from "next/head";
 import Header from "../components/header";
-import PropertiesGridContainer from "../components/properties-grid-container";
+import Hero from "../components/hero";
+import AreasContainer from "../components/areas-container";
+import FeatureContainer from "../components/feature-container";
+import RentPropertiesCard from "../components/rent-properties-card";
+import RentPropertiesContainer from "../components/rent-properties-container";
+import Contact from "../components/contact";
 import Footer from "../components/footer";
 
-const PropertiesGridView: NextPage = () => {
+const LandingPage: NextPage = () => {
+  const properties = [
+    {
+      imgUrl:
+        "https://images.unsplash.com/photo-1580587771525-78b9dba3b914?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1074&q=80",
+      name: "Riverside Retreat in Sydney",
+      price: 25000,
+    },
+    {
+      imgUrl:
+        "https://images.unsplash.com/photo-1555636222-cae831e670b3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1477&q=80	",
+      name: "New York Cozy Cottage",
+      price: 120000,
+    },
+    {
+      imgUrl:
+        "https://images.unsplash.com/photo-1505843513577-22bb7d21e455?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1632&q=80	 ",
+      name: "Luxury Penthouse in Dubai Marina",
+      price: 450000,
+    },
+    {
+      imgUrl:
+        "https://images.unsplash.com/photo-1560185009-dddeb820c7b7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80 ",
+      name: "Premium Home in Berlin",
+      price: 357000,
+    },
+  ];
   return (
-    <div className="relative bg-gray-white w-full flex flex-col items-start justify-start text-center text-33xl text-gray-white font-body-regular-400">
-      <Header hamburger={false} />
-      <div className="self-stretch h-60 flex flex-col items-center justify-center bg-[url(/category@3x.png)] bg-cover bg-no-repeat bg-[top]">
-        <div className="flex flex-col items-center justify-start gap-[12px]">
-          <div className="relative leading-[72px] font-semibold">
-            Properties
-          </div>
-          <div className="relative text-base leading-[24px] text-whitesmoke-200 font-body-regular-600">
-            <span>{`Home / `}</span>
-            <span className="font-medium text-gray-white">Properties</span>
-          </div>
-        </div>
+    <>
+      <Head>
+        <title>Real Estate</title>
+        <meta
+          name="description"
+          content="Find your dream home with our professional real estate services. We offer a wide range of properties, from cozy apartments to luxurious estates, to suit your needs and budget. Explore our listings today and let us guide you on your journey to finding the perfect place to call home."
+        />
+      </Head>
+      <div className="relative bg-gray-white w-full flex flex-col items-center justify-start">
+        <Header hamburger={false} />
+        <Hero />
+        <AreasContainer />
+        <FeatureContainer />
+        <RentPropertiesCard properties={properties} />
+        <RentPropertiesContainer />
+        <Contact />
+        <Footer />
       </div>
-      <div className="self-stretch flex flex-col pt-16 px-0 pb-2 items-center justify-start gap-[95px] text-left text-base text-gray-black font-body-regular-600 lg:pl-[120px] lg:pr-[120px] lg:box-border md:pl-[60px] md:pr-[60px] md:box-border sm:pl-5 sm:pr-5 sm:box-border">
-        <div className="w-[272px] flex flex-row items-center justify-start">
-          <div className="flex flex-row items-end justify-start gap-[16px]">
-            <div className="flex flex-row items-start justify-start gap-[8px]">
-              <img className="relative w-6 h-6" alt="" src="/listbullets.svg" />
-              <img className="relative w-6 h-6" alt="" src="/squaresfour.svg" />
-            </div>
-            <div className="relative leading-[24px]">Sort by:</div>
-            <Dropdown
-              overlay={
-                <Menu>
-                  {(
-                    [
-                      { value: "Popular properties" },
-                      { value: "Latest properties" },
-                      { value: "Recommended properties" },
-                    ] as any
-                  ).map((option: any, index: number) => (
-                    <Menu.Item key={index}>
-                      <a onClick={(e) => e.preventDefault()}>
-                        {option.value || ""}
-                      </a>
-                    </Menu.Item>
-                  ))}
-                </Menu>
-              }
-              placement="bottomLeft"
-              trigger={["hover"]}
-            >
-              <a onClick={(e) => e.preventDefault()}>
-                {`Default Order `}
-                <DownOutlined />
-              </a>
-            </Dropdown>
-          </div>
-        </div>
-        <PropertiesGridContainer />
-        <div className="flex flex-row items-end justify-center gap-[8px] text-center text-primary-500">
-          <div className="rounded bg-primary-50 flex flex-row p-2.5 items-start justify-start">
-            <img className="relative w-6 h-6" alt="" src="/arrowleft.svg" />
-          </div>
-          <div className="rounded-10xs bg-primary-500 flex flex-col py-2.5 px-[9px] items-start justify-start text-gray-white">
-            <div className="relative leading-[24px] font-semibold flex items-end justify-center w-[26px]">
-              1
-            </div>
-          </div>
-          <div className="rounded-10xs bg-primary-50 flex flex-col py-2.5 px-[9px] items-start justify-start">
-            <div className="relative leading-[24px] font-semibold flex items-end justify-center w-[26px]">
-              2
-            </div>
-          </div>
-          <div className="rounded-10xs bg-primary-50 flex flex-col py-2.5 px-[9px] items-start justify-start">
-            <div className="relative leading-[24px] font-semibold flex items-end justify-center w-[26px]">
-              3
-            </div>
-          </div>
-          <div className="rounded-10xs bg-primary-50 flex flex-col py-2.5 px-[9px] items-start justify-start">
-            <div className="relative leading-[24px] font-semibold flex items-end justify-center w-[26px]">
-              ...
-            </div>
-          </div>
-          <div className="rounded-10xs bg-primary-50 flex flex-col py-2.5 px-[9px] items-start justify-start">
-            <div className="relative leading-[24px] font-semibold flex items-end justify-center w-[26px]">
-              54
-            </div>
-          </div>
-          <div className="rounded bg-primary-500 flex flex-row p-2.5 items-start justify-start">
-            <img className="relative w-6 h-6" alt="" src="/arrowright.svg" />
-          </div>
-        </div>
-      </div>
-      <Footer
-        imageIds="/houseline1.svg"
-        smallImageIds="/social-media-logo.svg"
-        mediumImageIds="/social-media-logo1.svg"
-        extraSmallImageIds="/social-media-logo2.svg"
-        largeImageIds="/social-media-logo3.svg"
-        extraLargeImageIds="/social-media-logo4.svg"
-      />
-    </div>
+    </>
   );
 };
 
-export default PropertiesGridView;
+export default LandingPage;
